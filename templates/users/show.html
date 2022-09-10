@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{user.full_name}}</title>
+  </head>
+  <body>
+    <h1>{{user.full_name}}</h1>
+    <form>
+      <button formaction="/users/{{user.id}}/edit" formmethod="GET">
+        Edit
+      </button>
+      <button formaction="/users/{{user.id}}/delete" formmethod="POST">
+        Delete
+      </button>
+    </form>
+    <div>{% if user.image_url %} <img src="{{user.image_url}}" {% endif %}</div>
+  </body>
+</html>
