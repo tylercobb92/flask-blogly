@@ -2,14 +2,11 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-default_img = "https://www.freeiconspng.com/img/3048"
-
+default_img = "https://www.freeiconspng.com/uploads/user-login-icon-14.png"
 
 def connect_db(app):
     db.app=app
     db.init_app(app)
-
-
 
 """Models for Blogly."""
 class User(db.Model):
