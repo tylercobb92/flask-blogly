@@ -31,7 +31,7 @@ class Post(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.now)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
-    # @property from solution: lookup how it works
-    # @property
-    # def friendly_date(self):
-    #     return self.created_at.strftime("%a %b %-d %Y, %-I:%M %p")
+    @property
+    def friendly_date(self):
+        # %a = weekday, %b = month, %-d = numeral for day without leading 0, %Y = year, %-I numeral hour without leading 0, %M = numeral minutes, %p = AM/PM
+        return self.created_at.strftime("%a %b %-d %Y, %-I:%M %p")
