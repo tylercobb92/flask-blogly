@@ -10,12 +10,12 @@ app.config['SQLALCHEMY_ECHO'] = False
 app.config['TESTING'] = True
 app.config['DEBUG_TB_HOSTS'] = ['dont-show-debug-toolbar']
 
-db.drop_all()
-db.create_all()
+
 
 class UserViewsTestCase(TestCase):
     def setUp(self):
-        User.query.delete()
+        db.drop_all()
+        db.create_all()
 
         user = User(first_name='John', last_name='Smith', image_url=default_img)
         db.session.add(user)
@@ -79,11 +79,12 @@ class UserViewsTestCase(TestCase):
             self.assertIn('John', html)
             self.assertIn('Doe', html)
 
-    # def test_delete_user(self):
-    #     with app.test_client() as client:
-    #         resp = client.post('users/{self.user.id}/delete', follow_redirects=True)
-    #         html = resp.get_data(as_text=True)
-
-    #         self.assertEqual(resp.status_code, 200)
-    #         self.assertNotIn('John', html)
-    #         self.assertNotIn('Smith', html)
+    def test_delete_user(self):
+        with app.test_client() as client:
+            resp = client.post(f'users/{self.user_id}/delete', follow_redirects=True)
+            html = resp.get_data(as_text=True)
+            print(resp.status_code)
+            print('user is', self.user_id)
+            self.assertEqual(resp.status_code, 200)
+            self.assertNotIn('John', html)
+            self.assertNotIn('Smith', html)
