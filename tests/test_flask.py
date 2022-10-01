@@ -83,8 +83,6 @@ class UserViewsTestCase(TestCase):
         with app.test_client() as client:
             resp = client.post(f'users/{self.user_id}/delete', follow_redirects=True)
             html = resp.get_data(as_text=True)
-            print(resp.status_code)
-            print('user is', self.user_id)
             self.assertEqual(resp.status_code, 200)
             self.assertNotIn('John', html)
             self.assertNotIn('Smith', html)
