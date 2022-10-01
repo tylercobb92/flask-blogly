@@ -22,7 +22,7 @@ class User(db.Model):
     last_name=db.Column(db.String, nullable=False)
     image_url=db.Column(db.String, nullable=False, default=default_img)
 
-    posts = db.relationship('Post', backref='user')
+    posts = db.relationship('Post', backref='user', cascade='all, delete-orphan')
 
 class Post(db.Model):
     __tablename__ = 'posts'
