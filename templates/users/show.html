@@ -17,5 +17,19 @@
       </button>
     </form>
     <div>{% if user.image_url %} <img src="{{user.image_url}}" {% endif %}</div>
+
+    <h2>Posts</h2>
+    <ul>
+      {% for post in user.posts %}
+      <li>
+        <a href="/posts/{{post.id}}">{{post.title}}</a>
+        <small>{{post.friendly_date}}</small>
+      </li>
+      {% endfor %}
+    </ul>
+
+    <p>
+      <a href="/users/{{user.id}}/posts/new"><button>Add Post</button></a>
+    </p>
   </body>
 </html>
