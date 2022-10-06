@@ -3,7 +3,7 @@ from cgitb import html
 from unittest import TestCase
 
 from app import app
-from models import db, User, default_img
+from models import db, User, default_img, Post
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly_test'
 app.config['SQLALCHEMY_ECHO'] = False
@@ -21,6 +21,10 @@ class UserViewsTestCase(TestCase):
         db.session.add(user)
         db.session.commit()
         self.user_id=user.id
+
+        post = Post(title='First Post', content='My first post!', user_id = self.user_id)
+        db.session.add(post)
+        db.session.commit
 
     def tearDown(self):
         db.session.rollback()
