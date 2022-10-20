@@ -1,27 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{tag.name}}</title>
-  </head>
-  <body>
-    <h1>{{ tag.name }}</h1>
+{% extends 'base.html' %} {% block title %}{{ tag.name }}{% endblock %} {% block
+content %}
 
-    <ul>
-      {% for post in tag.posts %}
-      <li><a href="/posts/{{ post.id }}">{{ post.title }}</a></li>
-      {% endfor %}
-    </ul>
+<h1>{{ tag.name }}</h1>
 
-    <form>
-      <button formmethod="GET" formaction="/tags/{{ tag.id }}/edit">
-        Edit
-      </button>
-      <button formmethod="POST" formaction="/tags/{{ tag.id }}/delete">
-        Delete
-      </button>
-    </form>
-  </body>
-</html>
+<ul>
+  {% for post in tag.posts %}
+  <li><a href="/posts/{{ post.id }}">{{ post.title }}</a></li>
+  {% endfor %}
+</ul>
+
+<form>
+  <button
+    formmethod="GET"
+    formaction="/tags/{{ tag.id }}/edit"
+    class="btn btn-primary"
+  >
+    Edit
+  </button>
+  <button
+    formmethod="POST"
+    formaction="/tags/{{ tag.id }}/delete"
+    class="btn btn-danger"
+  >
+    Delete
+  </button>
+</form>
+{% endblock %}
